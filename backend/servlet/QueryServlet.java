@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,11 +37,20 @@ public class QueryServlet extends HttpServlet {
 		User user = new User();
 		if(userDao.query(number)!=0){  //查询是否中奖
 			user = userDao.queryUser(number);
-			request.setAttribute("user", user);
-			request.getRequestDispatcher("").forward(request, response);
+			String userRes = user.getName()+" "+user.getUserId()+" "+user.getTel()+" "+user.getPurchase();
+			
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.write(userRes);
+			out.close();
 		}
 		else{
 			//抱歉未中奖
+			String userRes = "抱歉未中奖";
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.write(userRes);
+			out.close();
 		}
 	}
 
