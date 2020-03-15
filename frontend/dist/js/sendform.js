@@ -1,4 +1,5 @@
 function sendform() {
+	var name=document.getElementById("name").value;
 	var idnum=document.getElementById("idNum").value;
 	var telnum=document.getElementById("telNum").value;
 	var aptnum=document.getElementById("aptNum").value;
@@ -21,6 +22,7 @@ function sendform() {
 	}
 	
 	var data = {
+		name:name,
 		idnum:idnum,
 		telnum:telnum,
 		aptnum:aptnum,
