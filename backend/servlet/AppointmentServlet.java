@@ -32,9 +32,10 @@ public class AppointmentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String name = request.getParameter("name");
-		String id_num = request.getParameter("idNum");
-		String phone_num = request.getParameter("telNum");
-		int subscribe_num = Integer.parseInt(request.getParameter("aptNum"));
+		String id_num = request.getParameter("idnum");
+		String phone_num = request.getParameter("telnum");
+		String num = request.getParameter("aptnum");
+		int  subscribe_num = Integer.valueOf(num);
 		AppointmentDAO appointmentDAO = new AppointmentDAO();
 		String appointmentRes = null;
 		int flag = appointmentDAO.doAppointmant(name, id_num, phone_num, subscribe_num);
