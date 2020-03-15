@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.UserDao;
-import tmall.dao.UserDAO;
-import tmall.dao.UserDAOImpl;
+import pojo.User;
 
 /**
  * 中签查询功能
@@ -33,7 +32,15 @@ public class QueryServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		int number = Integer.parseInt(request.getParameter("numbers"));   //接收表单编号
 		UserDao userDao = new UserDao();
-		userDao.query(number);            //查询是否中奖
+		User user = new User();
+		if(userDao.query(number)!=0){  //查询是否中奖
+			user = userDao.queryUser(number);
+			request.setAttribute("user", user);
+			request.getRequestDispatcher("").forward(request, response);
+		}
+		else{
+			//抱歉未中奖
+		}
 	}
 
 	/**
