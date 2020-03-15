@@ -1,5 +1,11 @@
 function queryform() {
-	var aptId=document.getElementById("idNum").value;
+	var aptId=document.getElementById("aptid").value;
+	var sN = $("#aptid");
+	if(aptId == '' || aptId == undefined || aptId == null) {
+		sN.css('background-color', 'rgba(255,0,0,0.1)');
+		warning("未输入预约编号！");
+		return false;
+	}
 	var data = {
 		aptid:aptId,
 	};
