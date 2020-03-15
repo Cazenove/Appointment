@@ -1,7 +1,11 @@
+package dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import util.DBUtil;
 
 public class AppointmentDAO {
 	
@@ -10,11 +14,11 @@ public class AppointmentDAO {
 		
 	}
 	
-	public void doAppointmant() {
-		String name = "hello";
+	public int doAppointmant(String name,String id_num,String phone_num,int subscribe_num) {
+		/*String name = "hello";
 		String id_num = "111111";
 		String phone_num = "212121";
-		int subscribe_num = 3;
+		int subscribe_num = 3;*/
 		
 		int rounds = 0;
 		
@@ -36,8 +40,8 @@ public class AppointmentDAO {
 			while(Set.next()) {
 				if(rounds==Set.getInt("appointment_id")) {
 					//如果手机号或者身份证号已经在本次摇号登记过了，预约失败
-					System.out.println("手机号或者身份证号已经在本次摇号登记过了");
-					return;
+					//System.out.println("手机号或者身份证号已经在本次摇号登记过了");
+					return 0;
 				} else if(rounds <= Set.getInt("appointment_id")+3) {
 					//当用户有三轮内预约的记录时，根据记录的id查找draw_list
 					int appointment_list_id = Set.getInt("id");
@@ -45,8 +49,8 @@ public class AppointmentDAO {
 					PreparedStatement ps = conn.prepareStatement(str);
 					ResultSet rs = ps.executeQuery();
 					while(rs.next()) {
-						System.out.println("手机号或者身份证号在此前三次预约中成功中签");
-						return;
+						//System.out.println("手机号或者身份证号在此前三次预约中成功中签");
+						return 0;
 					}
 				}
 			}
@@ -55,14 +59,15 @@ public class AppointmentDAO {
 					+ "values ('"+name+"','"+id_num+"','"+phone_num+"','"+subscribe_num+"','"+rounds+"')";
 			PreparedStatement stmt = conn.prepareStatement(strInsert);
 			int i=stmt.executeUpdate();
-			System.out.println("预约成功");
-			return;
+			//System.out.println("预约成功");
+			return 1;
 			
 		} catch (SQLException e) {
 			System.out.print("ERROR!\n");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return 0;
 		
 	}
 }

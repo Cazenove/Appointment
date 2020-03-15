@@ -9,20 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UserDao;
-import pojo.User;
+import dao.AppointmentDAO;
 
 /**
- * 中签查询功能
+ * Servlet implementation class AppointmentServlet
  */
-@WebServlet("/query")
-public class QueryServlet extends HttpServlet {
+@WebServlet("/appointment")
+public class AppointmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QueryServlet() {
+    public AppointmentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,26 +31,24 @@ public class QueryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int number = Integer.parseInt(request.getParameter("aptid"));   //接收表单编号
-		UserDao userDao = new UserDao();
-		User user = new User();
-		if(userDao.query(number)!=0){  //查询是否中奖
-			user = userDao.queryUser(number);
-			String userRes = user.getName()+" "+user.getUserId()+" "+user.getTel()+" "+user.getPurchase();
-			
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.write(userRes);
-			out.close();
+		String name = request.getParameter("name");
+		String id_num = request.getParameter("idnum");
+		String phone_num = request.getParameter("telnum");
+		String num = request.getParameter("aptnum");
+		int  subscribe_num = Integer.valueOf(num);
+		AppointmentDAO appointmentDAO = new AppointmentDAO();
+		String appointmentRes = null;
+		int flag = appointmentDAO.doAppointmant(name, id_num, phone_num, subscribe_num);
+		if (flag==0) {
+			appointmentRes = "预约失败";
 		}
 		else{
-			//抱歉未中奖
-			String userRes = "抱歉未中奖";
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.write(userRes);
-			out.close();
+			appointmentRes = "预约成功";
 		}
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.write(appointmentRes);
+		out.close();
 	}
 
 	/**
