@@ -36,7 +36,7 @@ public class QueryServlet extends HttpServlet {
 		if(userDao.query(number)!=0){  //查询是否中奖
 			user = userDao.queryUser(number);
 			request.setAttribute("user", user);
-			request.getRequestDispatcher("").forward(request, response);
+			request.getRequestDispatcher("D:\\Users\\qaz70\\Documents\\GitHub\\live-project\\frontend\\index.html").forward(request, response);
 		}
 		else{
 			//抱歉未中奖
