@@ -1,3 +1,0 @@
-function queryform() {
-	alert("queryform");
-}
