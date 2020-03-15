@@ -8,6 +8,7 @@
 		<link href="dist/css/bootstrap.css" rel="stylesheet">
 		<script src="dist/js/jquery-3.4.1.js"></script>
 		<script src="dist/js/bootstrap.js"></script>
+		<script src="dist/js/jquery.form.js"></script>
 		<!-- 开始预约 -->
 		<script src="dist/js/startappoint.js"></script>
 		<!-- 停止预约 -->
@@ -16,7 +17,7 @@
 		<script src="dist/js/sendform.js"></script>
 		<!-- 查询表单 -->
 		<script src="dist/js/queryform.js"></script>
-
+		
 	</head>
 	<body>
 		<div class="container">
@@ -48,25 +49,25 @@
 						<div class="tab-content">
 							<!-- 预约 -->
 							<div role="tabpanel" class="tab-pane fade in active" id="appointment">
-								<form action="" onsubmit="return sendform()">
+								<form id="sendform">
 									<div class="form-group">
 										<label for="stuNum">身份证号码</label>
-										<input type="text" class="form-control" id="idNum" placeholder="请输入账号" />
+										<input type="text" class="form-control" id="idNum" placeholder="请输入身份证号码" />
 									</div>
 									<div class="form-group">
 										<label for="stuNum">手机号码</label>
-										<input type="text" class="form-control" id="telNum" placeholder="请输入账号" />
+										<input type="text" class="form-control" id="telNum" placeholder="请输入手机号码" />
 									</div>
 									<div class="form-group">
 										<label for="stuNum">预约数量</label>
-										<select class="form-control">
+										<select class="form-control" id="aptNum">
 											<option>1</option>
 											<option>2</option>
 											<option>3</option>
 										</select>
 									</div>
 									<div style="text-align:center">
-										<button type="submit" class="btn btn-default" onclick="">预约</button>
+										<button type="button" class="btn btn-default" id="yuyue" onclick="sendform()">预约</button>
 									</div>
 								</form>
 							</div>
