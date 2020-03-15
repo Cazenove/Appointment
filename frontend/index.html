@@ -6,9 +6,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Bootstrap -->
 		<link href="dist/css/bootstrap.css" rel="stylesheet">
+		<link href="dist/css/fy-alert.css" rel="stylesheet">
 		<script src="dist/js/jquery-3.4.1.js"></script>
 		<script src="dist/js/bootstrap.js"></script>
 		<script src="dist/js/jquery.form.js"></script>
+		<script src="dist/js/fy-alert.js"></script>
 		<!-- 开始预约 -->
 		<script src="dist/js/startappoint.js"></script>
 		<!-- 停止预约 -->
@@ -17,7 +19,14 @@
 		<script src="dist/js/sendform.js"></script>
 		<!-- 查询表单 -->
 		<script src="dist/js/queryform.js"></script>
-		
+		<style>
+			.form-group input,select,.form-control {
+				background-color: rgba(100,100,100,0.1)
+			}
+			.tab-pane {
+				padding: 15px;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="container">
@@ -52,11 +61,11 @@
 								<form id="sendform">
 									<div class="form-group">
 										<label for="stuNum">身份证号码</label>
-										<input type="text" class="form-control" id="idNum" placeholder="请输入身份证号码" />
+										<input type="text" class="form-control" id="idNum" placeholder="请输入身份证号码" onfocus="isEmpty(this)" onchange="isEmpty(this)" />
 									</div>
 									<div class="form-group">
 										<label for="stuNum">手机号码</label>
-										<input type="text" class="form-control" id="telNum" placeholder="请输入手机号码" />
+										<input type="text" class="form-control" id="telNum" placeholder="请输入手机号码" onfocus="isEmpty(this)" onchange="isEmpty(this)"/>
 									</div>
 									<div class="form-group">
 										<label for="stuNum">预约数量</label>
@@ -76,7 +85,7 @@
 								<form id="queryform">
 									<div class="form-group">
 										<label for="stuNum">查询预约编号</label>
-										<input type="text" class="form-control" id="aptid" placeholder="请输入预约编号" />
+										<input type="text" class="form-control" id="aptid" placeholder="请输入预约编号" onfocus="isEmpty(this)" onchange="isEmpty(this)" />
 									</div>
 									<div style="text-align:center">
 										<button type="button" class="btn btn-default" onclick="queryform()">查询</button>
@@ -87,5 +96,6 @@
 					</div>
 				</div>
 			</div>
+		</div>
 	</body>
 </html>
