@@ -103,7 +103,7 @@ public class LotteryServlet extends HttpServlet {
 			all=all-appointers.get(i).getSubscribe();
 			if(all>0)
 			{
-				String sql="INSERT INTO draw_list VALUE("+appointers.get(i).getId()+","+turn+")";
+				String sql="INSERT INTO draw_list (appointment_list_id) VALUE("+appointers.get(i).getId()+")";
 				try (Connection c = DBUtil.getConnection(); Statement ps = c.prepareStatement(sql)) {
 			           
 		            ps.executeUpdate(sql);
