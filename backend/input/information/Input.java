@@ -44,11 +44,11 @@ public class Input {
             if(pnum.isRnum(str2)){
                 it.input(str0,str1,str2,str3);
             }
-            else
-                System.out.println("电话号码错误");
+            //else
+               // System.out.println("电话号码错误");
         }
-        else
-            System.out.println("身份证错误");
+        //else
+            //System.out.println("身份证错误");
 
     }
 
