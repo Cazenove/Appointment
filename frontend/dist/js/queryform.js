@@ -1,0 +1,3 @@
+function queryform() {
+	alert("queryform");
+}

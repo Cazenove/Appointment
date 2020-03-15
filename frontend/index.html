@@ -29,13 +29,26 @@
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#appointment" aria-controls="appointment" role="tab" data-toggle="tab">口罩预约</a></li>
 							<li role="presentation"><a href="#query" aria-controls="query" role="tab" data-toggle="tab">中签查询</a></li>
+							<ul class="nav nav-tabs">
+								<li role="presentation" class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+										操作 <span class="caret"></span>
+									</a>
+									<ul class="dropdown-menu">
+										<li>
+											<button class="btn btn-success btn-lg btn-block" onclick="startappoint()">开放预约</button>
+											<button class="btn btn-danger btn-lg btn-block" onclick="endappoint()">关闭预约</button>
+										</li>
+									</ul>
+								</li>
+							</ul>
 						</ul>
 						<br />
 						<!-- 切换标签 -->
 						<div class="tab-content">
 							<!-- 预约 -->
 							<div role="tabpanel" class="tab-pane fade in active" id="appointment">
-								<form>
+								<form action="" onsubmit="return sendform()">
 									<div class="form-group">
 										<label for="stuNum">身份证号码</label>
 										<input type="text" class="form-control" id="idNum" placeholder="请输入账号" />
@@ -53,13 +66,13 @@
 										</select>
 									</div>
 									<div style="text-align:center">
-										<button type="submit" class="btn btn-default">预约</button>
+										<button type="submit" class="btn btn-default" onclick="">预约</button>
 									</div>
 								</form>
 							</div>
 							<!-- 查询 -->
 							<div role="tabpanel" class="tab-pane fade" id="query">
-								<form>
+								<form action="" onsubmit="return queryform()">
 									<div class="form-group">
 										<label for="stuNum">预约编号</label>
 										<input type="text" class="form-control" id="stuNum" placeholder="请输入账号" />
