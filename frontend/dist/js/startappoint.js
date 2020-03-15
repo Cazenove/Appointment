@@ -1,0 +1,3 @@
+function startappoint() {
+	alert("startappoint");
+}
