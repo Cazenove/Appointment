@@ -1,26 +1,33 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UserDao;
-import pojo.User;
+import util.DBUtil;
 
 /**
- * 中签查询功能
+ * Servlet implementation class StarAppointServlet
  */
-@WebServlet("/query")
-public class QueryServlet extends HttpServlet {
+@WebServlet("/StarAppointServlet")
+public class StarAppointServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QueryServlet() {
+    public StarAppointServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,17 +37,24 @@ public class QueryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int number = Integer.parseInt(request.getParameter("aptid"));   //接收表单编号
-		UserDao userDao = new UserDao();
-		User user = new User();
-		if(userDao.query(number)!=0){  //查询是否中奖
-			user = userDao.queryUser(number);
-			request.setAttribute("user", user);
-			request.getRequestDispatcher("D:\\Users\\qaz70\\Documents\\GitHub\\live-project\\frontend\\index.html").forward(request, response);
-		}
-		else{
-			//抱歉未中奖
-		}
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		String start=request.getParameter("startDate");
+		String end=request.getParameter("endDate");
+		String max=request.getParameter("maxNum");
+		
+		start=start+" 00:00:00";
+		end=end+" 23:59:59";
+		
+		String sql="INSERT INTO appointment (start,end,max) VALUE('"+start+"','"+end+"',"+max+")";
+		try (Connection c = DBUtil.getConnection(); Statement ps = c.prepareStatement(sql)) {
+	           
+            ps.executeUpdate(sql);
+       
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+	    
 	}
 
 	/**

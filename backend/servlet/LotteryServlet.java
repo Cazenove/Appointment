@@ -131,7 +131,7 @@ public class LotteryServlet extends HttpServlet {
 		
 		popLottery(all,turn,appointers);
 		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("D:\\Users\\qaz70\\Documents\\GitHub\\live-project\\frontend\\index.html").forward(request, response);
 	}
 
 	/**

@@ -1,11 +1,19 @@
 package pojo;
 
 public class User {
-    private String name;   //姓名
-    private int  id;	   //身份证号	
-    private int number;    //预约编号
-    private String telNum; //电话号码
-    private int purchase;  //购买数量 
+	private int   id;      
+    private String name;   	  //姓名
+    private String  userId;   //身份证号	
+    private int number;       //预约编号
+    private String telNum;    //电话号码
+    private int purchase;     //购买数量 
+    public String getUserId(){
+    	return userId;
+    }
+    public void setUserId(String userId){
+    	this.userId = userId;
+    }
+    
     public int getNum() {
 		return number;
 	}
