@@ -30,7 +30,7 @@ public class QueryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int number = Integer.parseInt(request.getParameter("numbers"));   //接收表单编号
+		int number = Integer.parseInt(request.getParameter("aptid"));   //接收表单编号
 		UserDao userDao = new UserDao();
 		User user = new User();
 		if(userDao.query(number)!=0){  //查询是否中奖
