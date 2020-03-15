@@ -6,8 +6,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Bootstrap -->
 		<link href="dist/css/bootstrap.css" rel="stylesheet">
+		<link href="dist/css/fy-alert.css" rel="stylesheet">
 		<script src="dist/js/jquery-3.4.1.js"></script>
 		<script src="dist/js/bootstrap.js"></script>
+		<script src="dist/js/fy-alert.js"></script>
 		<!-- 开始预约 -->
 		<script src="dist/js/startappoint.js"></script>
 		<!-- 停止预约 -->
@@ -16,7 +18,14 @@
 		<script src="dist/js/sendform.js"></script>
 		<!-- 查询表单 -->
 		<script src="dist/js/queryform.js"></script>
-
+		<style>
+			.form-group input,select,.form-control {
+				background-color: rgba(100,100,100,0.1)
+			}
+			.tab-pane {
+				padding: 15px;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="container">
@@ -35,14 +44,14 @@
 						<div class="tab-content">
 							<!-- 预约 -->
 							<div role="tabpanel" class="tab-pane fade in active" id="appointment">
-								<form>
+								<form onsubmit="return appointmentSubmit()">
 									<div class="form-group">
 										<label for="stuNum">身份证号码</label>
-										<input type="text" class="form-control" id="idNum" placeholder="请输入账号" onfocus="isEmpty()" onchange="isEmpty()" style="background-color: rgba(50,50,50,0.1)"/>
+										<input type="text" class="form-control" id="idNum" placeholder="请输入身份号码" onfocus="isEmpty(this)" onchange="isEmpty(this)"/>
 									</div>
 									<div class="form-group">
 										<label for="stuNum">手机号码</label>
-										<input type="text" class="form-control" id="telNum" placeholder="请输入账号"  onfocus="isEmpty()" onchange="isEmpty()" style="background-color: rgba(50,50,50,0.1)" />
+										<input type="text" class="form-control" id="telNum" placeholder="请输入手机号码"  onfocus="isEmpty(this)" onchange="isEmpty(this)"/>
 									</div>
 									<div class="form-group">
 										<label for="stuNum">预约数量</label>
@@ -53,19 +62,19 @@
 										</select>
 									</div>
 									<div style="text-align:center">
-										<button type="submit" class="btn btn-default">预约</button>
+										<button type="submit" class="btn btn-default" onclick="checkSubmit()">预约</button>
 									</div>
 								</form>
 							</div>
 							<!-- 查询 -->
 							<div role="tabpanel" class="tab-pane fade" id="query">
-								<form>
+								<form onsubmit="return querySubmit()">
 									<div class="form-group">
 										<label for="stuNum">预约编号</label>
-										<input type="text" class="form-control" id="stuNum" placeholder="请输入账号" />
+										<input type="text" class="form-control" id="stuNum" placeholder="请输入编号" onfocus="isEmpty(this)" onchange="isEmpty(this)"/>
 									</div>
 									<div style="text-align:center">
-										<button type="submit" class="btn btn-default">预约</button>
+										<button type="submit" class="btn btn-default">查询</button>
 									</div>
 								</form>
 							</div>
