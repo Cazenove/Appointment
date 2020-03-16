@@ -29,7 +29,7 @@ function sendform() {
 	};
 	console.log(data);
 	$.ajax({
-		"url": "appointment",
+		"url": "http://127.0.0.1:3306/appointment",
 		"method": "POST",
 		"dataType": "text",
 		// 要发送给后端的数据参数，post时，数据必须写在data，get可以写在data,也可以跟在地址栏?号后面
