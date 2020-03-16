@@ -11,7 +11,8 @@ import util.DBUtil;
 
 public class UserDao {
     public int query(int numbers) {
-		String sql = "select * from draw_list where appointment_list_id='"+numbers+"'";
+		String sql = "select * from draw_list WHERE appointment_list_id="+numbers;
+		
 		User user = new User();
         try (Connection c = DBUtil.getConnection(); Statement ps = c.prepareStatement(sql)) {
            
@@ -25,14 +26,13 @@ public class UserDao {
 
             e.printStackTrace();
         }  
-
-        String id = ""+user.getId();
-        if (!id.equals(null)) return numbers;
+        
+        if (user.getId()!=0) return numbers;
         else return 0;
     }
     
     public User queryUser(int numbers) {
-		String sql = "select * from appointment_list where appointment_id='"+numbers+"'";
+		String sql = "select * from appointment_list WHERE id="+numbers;
 		User user = new User();
         try (Connection c = DBUtil.getConnection(); Statement ps = c.prepareStatement(sql)) {
            

@@ -32,12 +32,17 @@ public class QueryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int number = Integer.parseInt(request.getParameter("aptid"));   //接收表单编号
+		int number = Integer.parseInt(request.getParameter("aptid")); //接收表单编号
+		
 		UserDao userDao = new UserDao();
 		User user = new User();
+		
 		if(userDao.query(number)!=0){  //查询是否中奖
 			user = userDao.queryUser(number);
-			String userRes = user.getName()+" "+user.getUserId()+" "+user.getTel()+" "+user.getPurchase();
+			String userRes = "恭喜中签!\n预约者"+
+			user.getName()+"\n预约编号"+user.getUserId()
+			+"\n预约人电话："+user.getTel()
+			+"\n购买数量："+user.getPurchase();
 			
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();

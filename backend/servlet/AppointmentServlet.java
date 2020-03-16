@@ -43,7 +43,7 @@ public class AppointmentServlet extends HttpServlet {
 			appointmentRes = "预约失败";
 		}
 		else{
-			appointmentRes = "预约成功";
+			appointmentRes = "预约成功,您的预约编号为"+appointmentDAO.getAppointmentId(id_num);
 		}
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();

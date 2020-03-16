@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,7 +36,7 @@ public class LotteryServlet extends HttpServlet {
     }
 
     
-    //×Ô¼º¶¨ÒåµÄ·½·¨,ÓÃÓÚ»ñÈ¡µ±Ç°µÄÔ¤Ô¼ÂÖÊı
+    //ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú»ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½Ô¤Ô¼ï¿½ï¿½ï¿½ï¿½
     private int getTurn()
 	{
 		String sql = "select * from appointment_list order by id DESC limit 1;" ;
@@ -55,7 +56,7 @@ public class LotteryServlet extends HttpServlet {
 		return turn;
 	}
     
-    //×Ô¼º¶¨ÒåµÄ·½·¨£¬ÓÃÓÚ»ñÈ¡µ±Ç°Ô¤Ô¼Ê±¼äÄÚµÄÔ¤Ô¼Õß
+    //ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú»ï¿½È¡ï¿½ï¿½Ç°Ô¤Ô¼Ê±ï¿½ï¿½ï¿½Úµï¿½Ô¤Ô¼ï¿½ï¿½
     private List<Appointer> getAppointers(int turn)
     {
     	List<Appointer> appointers=new ArrayList<Appointer>();
@@ -76,7 +77,7 @@ public class LotteryServlet extends HttpServlet {
 		return appointers;
     }
     
-    //×Ô¼º¶¨ÒåµÄ·½·¨£¬ÓÃÓÚ»ñÈ¡±¾ÂÖÔ¤Ô¼Ìá¹©µÄ¿ÚÕÖÊıÁ¿
+    //ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú»ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ô¤Ô¼ï¿½á¹©ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private int getAll(int turn)
     {
     	int all=0;
@@ -95,11 +96,15 @@ public class LotteryServlet extends HttpServlet {
 		return all;
     }
     
-    //×Ô¼º¶¨ÒåµÄ·½·¨£¬°ÑÖĞ½±µÄÔ¤Ô¼ÕßµÄÔ¤Ô¼id´æµ½Ô¤Ô¼±íÄÚ
+    //ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ½ï¿½ï¿½ï¿½Ô¤Ô¼ï¿½ßµï¿½Ô¤Ô¼idï¿½æµ½Ô¤Ô¼ï¿½ï¿½ï¿½ï¿½
     private void popLottery(int all,int turn,List<Appointer> appointers)
     {
     	for(int i=0;all>0;i++)
 		{
+    		if(i==appointers.size())
+    		{
+    			break;
+    		}
 			all=all-appointers.get(i).getSubscribe();
 			if(all>0)
 			{
@@ -123,15 +128,32 @@ public class LotteryServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		int turn = getTurn();
+		String status=request.getParameter("status");
 		
-		List<Appointer> appointers=getAppointers(turn);
+		if(status.contentEquals("end")==true)
+		{
+			int turn = getTurn();
+			
+			List<Appointer> appointers=getAppointers(turn);
+			
+			int all=getAll(turn);
+			
+			popLottery(all,turn,appointers);
+			
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.write("ç»“æŸæˆåŠŸ");
+			out.close();
+			
+		}
+		else
+		{
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.write("ç»“æŸå¤±è´¥");
+			out.close();
+		}
 		
-		int all=getAll(turn);
-		
-		popLottery(all,turn,appointers);
-		
-		request.getRequestDispatcher("D:\\Users\\qaz70\\Documents\\GitHub\\live-project\\frontend\\index.html").forward(request, response);
 	}
 
 	/**
@@ -139,6 +161,7 @@ public class LotteryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 	

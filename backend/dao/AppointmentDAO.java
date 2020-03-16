@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import util.DBUtil;
 
@@ -69,5 +70,23 @@ public class AppointmentDAO {
 		}
 		return 0;
 		
+	}
+	
+	public int getAppointmentId(String id_Num)
+	{
+		int id=0;
+		String sql="select id from appointment_list WHERE id_number="+id_Num;
+		try (Connection c = DBUtil.getConnection(); Statement ps = c.prepareStatement(sql)) {
+	           
+            ResultSet rs = ps.executeQuery(sql);
+            while (rs.next()) {
+            	id=rs.getInt("id");
+			}
+       
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+		return id;
 	}
 }
